@@ -1,12 +1,19 @@
+
+
 package com.example.taskapp.models
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
+import java.io.Serializable
+
+
 @Entity(tableName = "user_table")
-class User (
+data class User(
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
-    val firstname:String,
-    val lastName:String,
-    val age:Int
-)
+    val id: Int,
+    var firstname: String,
+    var lastName: String,
+    var age:Int
+): Serializable

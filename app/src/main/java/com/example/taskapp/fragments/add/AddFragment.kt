@@ -11,11 +11,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStore
 import androidx.navigation.fragment.findNavController
 import com.example.taskapp.R
-import com.example.taskapp.data.User
-import com.example.taskapp.data.UserViewModel
+import com.example.taskapp.models.User
+import com.example.taskapp.viewmodel.UserViewModel
 
 class AddFragment : Fragment() {
 

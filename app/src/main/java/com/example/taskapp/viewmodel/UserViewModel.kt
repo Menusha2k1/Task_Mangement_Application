@@ -39,9 +39,9 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun deleteUserById(userId: Int) {
+    fun deleteAllUsers() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteUserById(userId)
+            repository.deleteAllUsers()
         }
     }
 }

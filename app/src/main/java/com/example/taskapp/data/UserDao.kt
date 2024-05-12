@@ -12,7 +12,7 @@ import com.example.taskapp.models.User
 @Dao
 interface UserDao {
 
-    @Query("SELECT * FROM user_table ORDER BY id ASC")
+    @Query("SELECT * FROM user_table ORDER BY age ASC")
     fun readAllData(): LiveData<List<User>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -26,4 +26,7 @@ interface UserDao {
 
     @Query("DELETE FROM user_table WHERE id = :id")
     suspend fun deleteUserById(id: Int)
+
+    @Query("DELETE FROM user_table")
+    suspend fun deleteAllUsers()
 }
