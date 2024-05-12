@@ -1,15 +1,18 @@
-package com.example.taskapp.data
+package com.example.taskapp.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.taskapp.data.UserDatabase
+import com.example.taskapp.repository.UserRepository
+import com.example.taskapp.models.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application): AndroidViewModel(application) {
 
-    private val readAllData: LiveData<List<User>>
+    val readAllData: LiveData<List<User>>
     private val repository: UserRepository
 
     init{

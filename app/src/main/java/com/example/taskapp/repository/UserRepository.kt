@@ -1,6 +1,8 @@
-package com.example.taskapp.data
+package com.example.taskapp.repository
 
 import androidx.lifecycle.LiveData
+import com.example.taskapp.data.UserDao
+import com.example.taskapp.models.User
 
 class UserRepository(private val userDao: UserDao) {
 
