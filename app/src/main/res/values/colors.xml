@@ -6,4 +6,9 @@
     <color name="blue">#2196F3</color>
     <color name="yellow">#FFC107</color>
     <color name="red">#9A0D04</color>
+
+    <color name="High">#F44336</color>
+    <color name="Medium">#FFC107</color>
+    <color name="low">#4CAF50</color>
+
 </resources>

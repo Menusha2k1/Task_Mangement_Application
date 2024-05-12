@@ -1,7 +1,10 @@
 package com.example.taskapp.fragments.add
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,11 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import com.example.taskapp.MainActivity
 import com.example.taskapp.R
-import com.example.taskapp.models.User
+import com.example.taskapp.models.Task
 import com.example.taskapp.viewmodel.UserViewModel
 
 class AddFragment : Fragment() {
@@ -21,8 +26,9 @@ class AddFragment : Fragment() {
     private lateinit var mUserViewModel: UserViewModel
     private lateinit var firstNameEditText: EditText
     private lateinit var lastNameEditText: EditText
-    private lateinit var ageEditText: EditText
+    private lateinit var spn:Spinner
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
 
 
@@ -36,38 +42,47 @@ class AddFragment : Fragment() {
 
         firstNameEditText = view.findViewById(R.id.addFirstName_et)
         lastNameEditText = view.findViewById(R.id.addLastName_et)
-        ageEditText = view.findViewById(R.id.addAge_et)
+        spn = view.findViewById(R.id.spnPriority)
+
 
         val AddBTN = view.findViewById<Button>(R.id.add_btn)
         AddBTN.setOnClickListener{
             insertDataToDatabase()
         }
-        val Fname = view.findViewById<EditText>(R.id.addFirstName_et)
         return view
     }
 
 
     private fun insertDataToDatabase(){
-        val firstName = firstNameEditText.text.toString()
-        val lastName = lastNameEditText.text.toString()
-        val age = ageEditText.text
+        val title = firstNameEditText.text.toString()
+        val description = lastNameEditText.text.toString()
+        val priority = spn.selectedItem.toString()
+        val priority2 = spn
 
-        if(inputCheck(firstName,lastName,age)){
+
+        if(inputCheck(title,description,priority)){
             // Create User Object
-            val user = User(0, firstName, lastName,Integer.parseInt(age.toString()))
+            val task = Task(0, title, description,priority)
+
+
+
+
+
             // Add Data To Database
-            mUserViewModel.addUser(user)
+            mUserViewModel.addTask(task)
             Toast.makeText(requireContext(),"Successfully added!" , Toast.LENGTH_LONG).show()
             //navigate back
-            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
         }else{
             Toast.makeText(requireContext(),"Please Fill the fields." , Toast.LENGTH_LONG).show()
         }
 
     }
-    fun inputCheck(firstName: String, lastName: String, age: Editable): Boolean{
-        return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && age.isEmpty())
+    fun inputCheck(title: String, description: String, priority: String): Boolean{
+        return !(TextUtils.isEmpty(title) && TextUtils.isEmpty(description) && priority.isEmpty())
 
     }
+
 
 }

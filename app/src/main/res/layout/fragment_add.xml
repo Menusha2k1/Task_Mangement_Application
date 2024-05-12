@@ -36,13 +36,14 @@
         app:layout_constraintTop_toBottomOf="@+id/addFirstName_et"
         tools:ignore="MissingConstraints" />
 
-    <EditText
+    <TextView
         android:id="@+id/addAge_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         android:ems="10"
-        android:hint="Priority (1-10)"
+        android:text="Select Priority :"
+        android:textSize="16dp"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -50,6 +51,21 @@
         app:layout_constraintTop_toBottomOf="@+id/addLastName_et"
         tools:ignore="MissingConstraints" />
 
+
+    <Spinner
+
+        android:id="@+id/spnPriority"
+        android:layout_width="363dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@color/material_dynamic_neutral90"
+        android:entries="@array/priority"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAge_et"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/add_btn"
@@ -60,9 +76,10 @@
         android:translationZ="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addAge_et"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintTop_toBottomOf="@+id/spnPriority"
+        app:layout_constraintVertical_bias="0.056" />
 
     <TextView
         android:id="@+id/textView"

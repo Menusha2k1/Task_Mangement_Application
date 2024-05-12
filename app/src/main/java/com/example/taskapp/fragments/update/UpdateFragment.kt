@@ -1,29 +1,38 @@
 package com.example.taskapp.fragments.update
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.taskapp.MainActivity
 import com.example.taskapp.R
-import com.example.taskapp.models.User
+import com.example.taskapp.models.Task
 import com.example.taskapp.viewmodel.UserViewModel
 
 class UpdateFragment : Fragment() {
 
-    lateinit var updateFirstName: EditText
-    lateinit var updateLastName: EditText
-    lateinit var updateAge: EditText
+    lateinit var updateTitle: EditText
+    lateinit var updateDescription: EditText
+    lateinit var updatePriority: Spinner
     lateinit var updateButton: Button
     private lateinit var mUserViewModel: UserViewModel
-    private var user: User? = null
 
+
+    private var task: Task? = null
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,18 +43,22 @@ class UpdateFragment : Fragment() {
 
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-        updateFirstName = view.findViewById(R.id.updateFirstName_et)
-        updateLastName = view.findViewById(R.id.updateLastName_et)
-        updateAge = view.findViewById(R.id.updateAge_et)
+        updateTitle = view.findViewById(R.id.updateFirstName_et)
+        updateDescription = view.findViewById(R.id.updateLastName_et)
+        updatePriority = view.findViewById(R.id.updateAge_et)
         updateButton = view.findViewById(R.id.update_btn)
 
         // Retrieve the User object from the arguments
-        user = arguments?.getSerializable("user") as User?
+        task = arguments?.getSerializable("user") as Task?
+
+        val priorities = arrayOf("Low", "Medium", "High") // Example priorities
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, priorities)
+        updatePriority.adapter = adapter
 
         // Populate the EditText fields with the current values of the User
-        updateFirstName.setText(user?.firstname)
-        updateLastName.setText(user?.lastName)
-        updateAge.setText(user?.age.toString())
+        updateTitle.setText(task?.title)
+        updateDescription.setText(task?.description)
+        updatePriority.setSelection(priorities.indexOf(task?.priority))
 
         updateButton.setOnClickListener {
             updateUser()
@@ -55,22 +68,25 @@ class UpdateFragment : Fragment() {
 
         }
 
+
         return view
     }
 
     private fun updateUser() {
-        val firstName = updateFirstName.text.toString()
-        val lastName = updateLastName.text.toString()
-        val age = updateAge.text.toString().toInt()
+        val title = updateTitle.text.toString()
+        val description = updateDescription.text.toString()
+        val priority = updatePriority.selectedItem.toString()
 
-        if (user != null) {
+        if (task != null) {
             // Update the User object with the new values
-            user?.firstname = firstName
-            user?.lastName = lastName
-            user?.age = age
+            task?.title = title
+            task?.description = description
+            task?.priority = priority
 
             // Update the user in the database
-            mUserViewModel.updateUser(user!!)
+            mUserViewModel.updateUser(task!!)
         }
     }
-}
+
+    }
+

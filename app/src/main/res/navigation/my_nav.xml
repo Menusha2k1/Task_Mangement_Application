@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_update">
         <argument
             android:name="selectedUser"
-            app:argType="com.example.taskapp.models.User" />
+            app:argType="com.example.taskapp.models.Task" />
 
     </fragment>
 

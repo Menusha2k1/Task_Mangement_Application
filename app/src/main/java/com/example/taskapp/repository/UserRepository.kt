@@ -2,21 +2,21 @@ package com.example.taskapp.repository
 
 import androidx.lifecycle.LiveData
 import com.example.taskapp.data.UserDao
-import com.example.taskapp.models.User
+import com.example.taskapp.models.Task
 
 class UserRepository(private val userDao: UserDao) {
 
-    val  readAllData: LiveData<List<User>> = userDao.readAllData()
+    val  readAllData: LiveData<List<Task>> = userDao.readAllData()
 
-    suspend fun addUser(user: User){
-        userDao.addUser(user)
+    suspend fun addUser(task: Task){
+        userDao.addUser(task)
     }
-    suspend fun updateUser(user: User){
-        userDao.updateUser(user)
+    suspend fun updateUser(task: Task){
+        userDao.updateUser(task)
     }
 
-    suspend fun deleteUser(user: User){
-        userDao.deleteUser(user)
+    suspend fun deleteUser(task: Task){
+        userDao.deleteUser(task)
     }
 
     suspend fun deleteUserById(id: Int){
