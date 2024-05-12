@@ -1,11 +1,16 @@
+package com.example.taskapp.fragments.update
+
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.taskapp.MainActivity
 import com.example.taskapp.R
 import com.example.taskapp.models.User
 import com.example.taskapp.viewmodel.UserViewModel
@@ -44,6 +49,10 @@ class UpdateFragment : Fragment() {
 
         updateButton.setOnClickListener {
             updateUser()
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            Toast.makeText(requireContext(), "Successfully Updated!!!", Toast.LENGTH_LONG).show()
+            startActivity(intent)
+
         }
 
         return view
